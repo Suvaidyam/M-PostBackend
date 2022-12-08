@@ -9,7 +9,7 @@ router.use(require('./Auth/VerifyToken'));
 
 
 router.use('/company', require('./Company'));
-router.use('/employee', require('./employee'));
+router.use('/employee', require('./Employee'));
 
 
 module.exports = router;
