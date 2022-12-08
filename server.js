@@ -1,13 +1,15 @@
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 4000
-require('./DataBase/ConnectDB.js')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const Cors = require('cors')
 app.use(Cors());
 const path = require('path')
-require('dotenv').config({ path: '.env' })
+
+require("dotenv").config({ path: path.join(__dirname, ".env") });
+require('./DataBase/ConnectDB.js')
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.use('/', require('./Api'));
