@@ -12,10 +12,10 @@ module.exports = {
    },
    postCollection: async(req,res)=>{
     let created_by = req.decoded._id
-    let {name,type,parent,url,method} = req.body
+    let {name,type,parent,url,method,details} = req.body
       try {
         if(type){
-            let collection = await Collection.create({name,type,parent,url,method,created_by});
+            let collection = await Collection.create({name,type,parent,url,method,created_by,details});
             return res.status(200).json({ message: "collection list", collection: collection });
         }else{
             return res.status(400).json({ message: "type require" });
