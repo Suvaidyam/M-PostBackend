@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const CollectionSchema = new mongoose.Schema({
     name: {
         type: String,
-        enum:["New Collection","New Request"],
         default:"New Collection"
     },
     parent: {

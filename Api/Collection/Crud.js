@@ -1,5 +1,4 @@
 const Collection = require('../../Model/Collection');
-const mongoose = require('mongoose')
 module.exports = {
    getCollection: async(req,res)=>{
     let created_by = req.decoded._id
@@ -23,5 +22,21 @@ module.exports = {
       } catch (error) {
         return res.status(500).json({ message: error.message });
       }
-   }
+   },
+   putCollection: async(req,res)=>{
+      try {
+            let collection = await Collection.updateOne(req.params,req.body);
+            return res.status(200).json({ message: "Update successfully", collection: collection });
+      } catch (error) {
+        return res.status(500).json({ message: error.message });
+      }
+   },
+   deleteCollection: async(req,res)=>{
+      try {
+            let collection = await Collection.deleteOne(req.params);
+            return res.status(200).json({ message: "Delete successfully", collection: collection });
+      } catch (error) {
+        return res.status(500).json({ message: error.message });
+      }
+   },
 }
