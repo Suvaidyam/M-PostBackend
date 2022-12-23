@@ -32,8 +32,9 @@ module.exports = {
       }
    },
    deleteCollection: async(req,res)=>{
+    const {_id}=req.params
       try {
-            let collection = await Collection.deleteOne(req.params);
+            let collection = await Collection.remove({$or:[{_id:_id},{parent:_id}]});
             return res.status(200).json({ message: "Delete successfully", collection: collection });
       } catch (error) {
         return res.status(500).json({ message: error.message });
