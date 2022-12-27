@@ -13,9 +13,11 @@ require('./DataBase/ConnectDB.js')
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.use('/', require('./Api'));
-
-app.get("*", (req, res) => {
-  res.send("404 page not get");
-});
+app.use((req, res, error) => {
+  return res.status(404).json({ message: "404 page not get" });
+})
+// app.get("*", (req, res) => {
+//   return res.status(404).json({ message: "404 page not get" });
+// });
 
 app.listen(port, () => console.log(`app listening on port ${port}!`))
