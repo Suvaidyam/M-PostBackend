@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const crud = require('./Crud');
+const crud = require('./crud');
 router.get('/', crud.getCollection);
 router.post('/', crud.postCollection);
 router.put('/:_id', crud.putCollection);
