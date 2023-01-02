@@ -11,9 +11,9 @@ module.exports = {
    },
    postEnvironment: async(req,res)=>{
     let created_by = req.decoded._id
-    let {name,details,variable,value} = req.body
+    let {name,details,variable,value,current_value} = req.body
       try {
-            let environment = await Environment.create({name,variable,value,created_by,details});
+            let environment = await Environment.create({name,variable,value,current_value,created_by,details});
             return res.status(200).json({ message: "environment list", environment: environment });
       } catch (error) {
         return res.status(500).json({ message: error.message });

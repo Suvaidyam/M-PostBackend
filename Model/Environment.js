@@ -15,6 +15,10 @@ const environmentSchema = new mongoose.Schema({
                 type:String,
                 default:null
             },
+            current_value:{
+                type:String,
+                default:null
+            },
         }],
         default:null
     },
