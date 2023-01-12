@@ -4,7 +4,7 @@ module.exports = {
     let created_by = req.decoded._id
       try {
         let environment = await Environment.find({created_by});
-        return res.status(200).json({ message: "collection list", environment: environment });
+        return res.status(200).json({ message: "environment list", environment: environment });
       } catch (error) {
         return res.status(500).json({ message: error.message });
       }

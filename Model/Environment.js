@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const environmentSchema = new mongoose.Schema({
+    collectionId:{type:mongoose.Schema.Types.ObjectId,ref:'Collection',default:null},
     name: {
         type: String,
         default:"New Environment"
