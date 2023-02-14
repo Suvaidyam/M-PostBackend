@@ -1,8 +1,9 @@
 const WorkSpace = require('../../Model/WorkSpace');
 module.exports = {
     findWorkSpace: async (req, res) => {
+        let _id = req.decoded._id;
         try {
-            let workSpace = await WorkSpace.find();
+            let workSpace = await WorkSpace.find({created_by:_id});
             return res.status(200).json({ message: "workSpace List", workSpace: workSpace });
         } catch (error) {
             return res.status(500).json({ message: error.message });
