@@ -1,5 +1,8 @@
 const User = require('../../Model/User');
 const mongoose = require('mongoose')
+const fs = require('fs');
+const path = require('path');
+const { url } = require('inspector');
 module.exports = {
     findAll: async (req, res) => {
         let condition = {}
@@ -47,6 +50,33 @@ module.exports = {
             let user = await User.updateOne(req.params, {name, password, email, company,url });
             // console.log(req.params)
             return res.status(200).json({ message: "Company Successfully Updated", user: user });
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    },
+    deletePhoto: async(req, res)=>{
+        try {
+            let _id = req.decoded._id;
+            let user = await User.findById(_id);
+            let imgUrl = user.url;
+            console.log(imgUrl)
+            if(user){
+                const filter = { _id: _id };
+                let url=""
+                let user = await User.updateOne(filter, {url });
+                const imagePath = path.join(__dirname, '../../'+ imgUrl);
+                if(imgUrl){
+                    fs.unlink(imagePath, (err) => {
+                        if (err) {
+                          return res.status(400).json({message:"Path not found", err});
+                        }
+                        return res.status(200).json({ message: `File ${imgUrl} has been deleted`, user});
+                      });
+                }else{
+                    return res.status(200).json({ message: "imgUrl is require"});
+                }
+            }
+            
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
