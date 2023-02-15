@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     },
     url:{
         type:String,
-        default:null
+        default:""
     },
     userType:{
         type:String,
