@@ -6,7 +6,12 @@ const WorkSpaceSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+    created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    visibility:{
+        type:String,
+        enum:["PERSONAL", "TEAM","PUBLIC"],
+        default:"PERSONAL"
+    }
 
 });
 
