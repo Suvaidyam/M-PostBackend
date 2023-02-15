@@ -12,7 +12,7 @@ module.exports = {
         }
         try {
             let user = await User.find(condition);
-            return res.status(200).json({ message: "user List", user: user });
+            return res.status(200).json({ message: "User List", user: user });
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
@@ -20,7 +20,7 @@ module.exports = {
     findById: async (req, res) => {
         try {
             let user = await User.findById(req.params._id);
-            return res.status(200).json({ message: "user", user: user });
+            return res.status(200).json({ message: "User", user: user });
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
@@ -30,14 +30,14 @@ module.exports = {
             let { name, password, email, company } = req.body;
             let user = await User.findOne({ email });
             if (user) {
-                return res.status(400).json({ message: "User is already exists" });
+                return res.status(400).json({ message: "User Already Exists" });
             } else {
                 if (!name || !password || !email || !company) {
                     return res.status(400).json({ message: "name , password , email and company(company_Id) is required" });
                 }
                 let userType = "EMPLOYEE";
                 user = await User.create({ name, password, email, company, userType });
-                return res.status(200).json({ message: "Company Successfully Created", user: user });
+                return res.status(200).json({ message: "User Registered Successfully", user: user });
             }
         } catch (error) {
             return res.status(500).json({ message: error.message });
@@ -66,7 +66,7 @@ module.exports = {
                         });
                         const url = req.file?.path;
                         let user = await User.updateOne(req.params, { url });
-                        return res.status(200).json({ message: "Image Successfully Updated", user: user });
+                        return res.status(200).json({ message: "Image Successfully Uploaded", user: user });
                     }
                 }
             } else {
@@ -92,7 +92,7 @@ module.exports = {
                         if (err) {
                             return res.status(400).json({ message: "Path not found", err });
                         }
-                        return res.status(200).json({ message: `File ${imgUrl} has been deleted`, user });
+                        return res.status(200).json({ message: `Image Successfully Deleted`, user });
                     });
                 } else {
                     return res.status(200).json({ message: "imgUrl is require" });
