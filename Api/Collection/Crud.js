@@ -15,9 +15,9 @@ module.exports = {
       try {
         if(type){
             let collection = await Collection.create({name,type,parent,url,method,created_by,details});
-            return res.status(200).json({ message: "collection list", collection: collection });
+            return res.status(200).json({ message: name+"Created Successfull", collection: collection });
         }else{
-            return res.status(400).json({ message: "type require" });
+            return res.status(400).json({ message: "File Type Required" });
         }
       } catch (error) {
         return res.status(500).json({ message: error.message });
@@ -26,7 +26,7 @@ module.exports = {
    putCollection: async(req,res)=>{
       try {
             let collection = await Collection.updateOne(req.params,req.body);
-            return res.status(200).json({ message: "Update successfully", collection: collection });
+            return res.status(200).json({ message: "Save Successfully", collection: collection });
       } catch (error) {
         return res.status(500).json({ message: error.message });
       }
@@ -35,7 +35,7 @@ module.exports = {
     const {_id}=req.params
       try {
             let collection = await Collection.deleteOne({$or:[{_id:_id},{parent:_id}]});
-            return res.status(200).json({ message: "Delete successfully", collection: collection });
+            return res.status(200).json({ message: "Delete Successfully", collection: collection });
       } catch (error) {
         return res.status(500).json({ message: error.message });
       }
