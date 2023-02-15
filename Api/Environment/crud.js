@@ -14,7 +14,7 @@ module.exports = {
     let {name,details,variable,value,current_value} = req.body
       try {
             let environment = await Environment.create({name,variable,value,current_value,created_by,details});
-            return res.status(200).json({ message: "environment list", environment: environment });
+            return res.status(200).json({ message: name + " Created Successfully", environment: environment });
       } catch (error) {
         return res.status(500).json({ message: error.message });
       }
@@ -22,7 +22,7 @@ module.exports = {
    putEnvironment: async(req,res)=>{
       try {
             let environment = await Environment.updateOne(req.params,req.body);
-            return res.status(200).json({ message: "Update successfully", environment: environment });
+            return res.status(200).json({ message:"Update Successfully", environment: environment });
       } catch (error) {
         return res.status(500).json({ message: error.message });
       }
@@ -30,7 +30,7 @@ module.exports = {
    deleteEnvironment: async(req,res)=>{
       try {
             let environment = await Environment.remove(req.params);
-            return res.status(200).json({ message: "Delete successfully", environment: environment });
+            return res.status(200).json({ message: "Deleted Successfully", environment: environment });
       } catch (error) {
         return res.status(500).json({ message: error.message });
       }
