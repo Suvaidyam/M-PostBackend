@@ -21,7 +21,7 @@ const crud = require('./crud');
 router.get('/', crud.findAll);
 router.get('/:_id', crud.findById);
 router.post('/', crud.create);
-router.put('/:_id',upload.single('file'), crud.updateOne);
+router.put('/updateImage/:_id',upload.single('file'), crud.updateImage);
 router.delete('/deletePhoto',crud.deletePhoto);
 
 module.exports = router
