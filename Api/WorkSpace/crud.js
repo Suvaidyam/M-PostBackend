@@ -11,13 +11,13 @@ module.exports = {
     },
     postWorkSpace: async (req, res) => {
         try {
-            let { name } = req.body;
+            let { name , visibility} = req.body;
             let created_by = req.decoded._id;
             let workSpace = await WorkSpace.findOne({name ,created_by});
             if (workSpace) {
                 return res.status(400).json({ message: name +" workSpace name is already exists" });
             } else {
-                workSpace = await WorkSpace.create({name , created_by});
+                workSpace = await WorkSpace.create({name , created_by , visibility});
                 return res.status(200).json({ message: "workSpace Successfully Created", workSpace: workSpace });
             }
         } catch (error) {
