@@ -11,10 +11,10 @@ module.exports = {
    },
    postCollection: async(req,res)=>{
     let created_by = req.decoded._id
-    let {name,type,parent,url,method,details} = req.body
+    let {name,type,parent,url,method,details,workspace_id} = req.body
       try {
         if(type){
-            let collection = await Collection.create({name,type,parent,url,method,created_by,details});
+            let collection = await Collection.create({name,type,parent,url,method,created_by,details, workspace_id});
             return res.status(200).json({ message: name + " Created Successfully", collection: collection });
         }else{
             return res.status(400).json({ message: "File Type Required" });
