@@ -1,4 +1,5 @@
 const WorkSpace = require('../../Model/WorkSpace');
+const Environment = require('../../Model/Environment');
 module.exports = {
     findWorkSpace: async (req, res) => {
         let _id = req.decoded._id;
@@ -18,6 +19,8 @@ module.exports = {
                 return res.status(400).json({ message: name +" workSpace name is already exists" });
             } else {
                 workSpace = await WorkSpace.create({name , created_by , visibility});
+                let workspace_id = workSpace._id
+                let environment = await Environment.create({name:"Globals",created_by , workspace_id});
                 return res.status(200).json({ message: "workSpace Successfully Created", workSpace: workSpace });
             }
         } catch (error) {

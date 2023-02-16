@@ -32,7 +32,7 @@ const Register = async (req, res) => {
                     let created_by = newUser._id;
                     const workSpace = await WorkSpace.create({created_by});
                     let workspace_id = workSpace._id
-                    let environment = await Environment.create({created_by , workspace_id});
+                    let environment = await Environment.create({name:"Globals",created_by , workspace_id});
                 }
                 return res.status(200).json({ message: "User Successfully Created", user: user });
             }
