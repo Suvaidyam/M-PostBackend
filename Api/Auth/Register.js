@@ -8,7 +8,7 @@ const Register = async (req, res) => {
         let { name, password, email, company, companyName, companyCode } = req.body;
         let userType = "EMPLOYEE";
         if (!name || !password || !email) {
-            return res.status(400).json({ message: "name company_refId,password,email  is required" })
+            return res.status(400).json({ message: "All Fields are Required" })
         };
         if (company || (companyName && companyCode)) {
         let user = await User.findOne({ email });
@@ -32,7 +32,7 @@ const Register = async (req, res) => {
                     let created_by = newUser._id;
                     const workSpace = await WorkSpace.create({created_by});
                     let workspace_id = workSpace._id
-                    let environment = await Environment.create({created_by , workspace_id});
+                    let environment = await Environment.create({name:"Globals",created_by , workspace_id});
                 }
                 return res.status(200).json({ message: "User Successfully Created", user: user });
             }
