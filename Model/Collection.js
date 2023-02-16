@@ -15,6 +15,7 @@ const CollectionSchema = new mongoose.Schema({
         required:true
     }, 
     created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }   ,
+    workspace_id:{type: mongoose.Schema.Types.ObjectId, ref: 'WorkSpace', required: true},
     details: {
         type:{
             url: {

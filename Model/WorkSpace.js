@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const WorkSpaceSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
-        unique: true,
+        default:"My Workspace"
     },
     created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     visibility:{
@@ -12,7 +11,7 @@ const WorkSpaceSchema = new mongoose.Schema({
         enum:["PERSONAL", "TEAM","PUBLIC"],
         default:"PERSONAL"
     }
-
+ 
 });
 
 const WorkSpace = mongoose.model('WorkSpace', WorkSpaceSchema)

@@ -1,5 +1,7 @@
 const User = require('../../Model/User');
 const Company = require('../../Model/Company');
+const WorkSpace = require('../../Model/WorkSpace');
+const Environment = require('../../Model/Environment');
 
 const Register = async (req, res) => {
     try {
@@ -25,6 +27,13 @@ const Register = async (req, res) => {
                     }
                 }
                 user = await User.create({ name, password, email, company, userType });
+                if(user){
+                    let newUser = await User.findOne({email});
+                    let created_by = newUser._id;
+                    const workSpace = await WorkSpace.create({created_by});
+                    let workspace_id = workSpace._id
+                    let environment = await Environment.create({created_by , workspace_id});
+                }
                 return res.status(200).json({ message: "User Successfully Created", user: user });
             }
         } else {
@@ -32,7 +41,7 @@ const Register = async (req, res) => {
         }
 
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message }); 
     }
 }
 
