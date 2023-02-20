@@ -6,6 +6,7 @@ const environmentSchema = new mongoose.Schema({
         enum:["New Environment", "Globals"],
         default:"New Environment"
     },
+    workspace_id:{type: mongoose.Schema.Types.ObjectId, ref: 'WorkSpace', required: true},
     details: {
         type:[{
             variable:{
@@ -23,8 +24,8 @@ const environmentSchema = new mongoose.Schema({
         }],
         default:null
     },
-    created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true } ,
-    workspace_id:{type: mongoose.Schema.Types.ObjectId, ref: 'WorkSpace', required: true}
+    created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+
 });
 
 const Environment = mongoose.model('environment', environmentSchema)

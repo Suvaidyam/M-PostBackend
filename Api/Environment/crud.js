@@ -1,9 +1,9 @@
 const Environment = require('../../Model/Environment');
+const mongoose = require('mongoose')
 module.exports = {
    getEnvironment: async(req,res)=>{
-    let created_by = req.decoded._id
       try {
-        let environment = await Environment.find({created_by});
+        let environment = await Environment.find(req.params);
         return res.status(200).json({ message: "environment list", environment: environment });
       } catch (error) {
         return res.status(500).json({ message: error.message });
