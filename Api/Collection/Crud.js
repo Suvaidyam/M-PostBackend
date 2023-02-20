@@ -1,9 +1,8 @@
 const Collection = require('../../Model/Collection');
 module.exports = {
    getCollection: async(req,res)=>{
-    let created_by = req.decoded._id
       try {
-        let collection = await Collection.find({created_by});
+        let collection = await Collection.find(req.params);
         return res.status(200).json({ message: "Collection list", collection: collection });
       } catch (error) {
         return res.status(500).json({ message: error.message });
