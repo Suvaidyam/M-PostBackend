@@ -10,7 +10,10 @@ const WorkSpaceSchema = new mongoose.Schema({
         type:String,
         enum:["PERSONAL", "TEAM","PUBLIC"],
         default:"PERSONAL"
-    }
+    },
+    // workSpaceSelected:{
+    //     type: Boolean, default: false
+    // }
  
 });
 

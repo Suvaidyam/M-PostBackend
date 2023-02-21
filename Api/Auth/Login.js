@@ -24,7 +24,7 @@ const Login = async (req, res) => {
                         url: user.url
                     }, JWT_SECRET);
                     return res.json({
-                        message: 'Login Successful',
+                        message: 'Login Successfully',
                         token: token
                     });
                 } else{

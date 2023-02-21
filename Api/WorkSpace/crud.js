@@ -29,8 +29,8 @@ module.exports = {
     },
     putWorkSpace: async (req, res) => {
         try {
-            let { name} = req.body;
-            let workSpace = await WorkSpace.updateOne(req.params ,{name});
+            let { name, visibility} = req.body;
+            let workSpace = await WorkSpace.updateOne(req.params ,{name , visibility});
             return res.status(200).json({ message: "workSpace Successfully Updated", workSpace: workSpace });
         } catch (error) {
             return res.status(500).json({ message: error.message });
