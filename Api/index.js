@@ -14,6 +14,7 @@ router.use('/collection', require('./Collection'));
 router.use('/environment', require('./Environment'));
 router.use('/workspace', require('./WorkSpace'));
 router.use('/selectedworkspace', require('./SelectedWorkSpace'));
+router.use('/history', require('./History'));
 
 
 
