@@ -8,8 +8,8 @@ const VerifyOtp = async (req, res) => {
       let currentTime = new Date().getTime();
       let diffTime = data.expirIn - currentTime;
       if (diffTime <= 0) {
-        await Otp.deleteOne({ otpCode });
-        return res.status(200).json({ message: "OTP is Expired" });
+        await Otp.deleteOne({ otpCode, email });
+        return res.status(200).json({ message: "OTP Expire" });
       }
       return res.status(200).json({ message: "OTP verifyed" });
     } else {

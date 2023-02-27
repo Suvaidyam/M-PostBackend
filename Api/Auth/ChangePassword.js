@@ -1,10 +1,11 @@
 const User = require("../../Model/User");
+const Otp = require("../../Model/Otp");
 
 const ChangePassword = async (req, res) => {
   try {
     let password = req.body.password;
     let email = req.body.email;
-    let otpCode = req.body.otpCode;
+
     let user = await User.findOne({ email, otpCode });
     if (user) {
       user.password = password;
