@@ -81,7 +81,6 @@ module.exports = {
             let _id = req.decoded._id;
             let user = await User.findById(_id);
             let imgUrl = user.url;
-            console.log(imgUrl)
             if (user) {
                 const filter = { _id: _id };
                 let url = ""
