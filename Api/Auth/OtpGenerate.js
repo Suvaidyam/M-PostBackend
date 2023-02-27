@@ -13,10 +13,10 @@ const OtpGenerate = async (req, res) => {
         email: email,
         expirIn: new Date().getTime() + 300 * 1000,
       });
-      let data = await otpData.save();
+      await otpData.save();
       sendemail.send(email, otpCode);
 
-      return res.status(200).json({ message: "Plese check your email", data });
+      return res.status(200).json({ message: "Plese check your email" });
     } else {
       return res.status(404).json({ message: "Email Id not Exist" });
     }
