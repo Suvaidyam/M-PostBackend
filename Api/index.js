@@ -3,8 +3,6 @@ const router = express.Router();
 
 router.use('/auth', require('./Auth'));
 
-router.get('/company-list', require('./Company/crud').findAll);
-
 router.use(require('./Auth/VerifyToken'));
 
 router.use('/employee', require('./Employee'));
