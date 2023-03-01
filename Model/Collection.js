@@ -1,5 +1,27 @@
 const mongoose = require('mongoose');
-
+const DetailsSchema = new mongoose.Schema({
+    url: {
+        type:String,
+        default:null
+    },
+    method: {
+        type: String,
+        enum:["GET", "POST","PUT","DELETE"],
+        default:"GET"
+    },
+    query: {
+        type:{},
+        default:null
+    },
+    body: {
+        type:{},
+        default:null
+    },
+    headers: {
+        type:{},
+        default:null
+    }
+})
 const CollectionSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -17,31 +39,8 @@ const CollectionSchema = new mongoose.Schema({
     created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }   ,
     workspace_id:{type: mongoose.Schema.Types.ObjectId, ref: 'WorkSpace', required: true},
     details: {
-        type:{
-            url: {
-                type:String,
-                default:null
-            },
-            method: {
-                type: String,
-                enum:["GET", "POST","PUT","DELETE"],
-                default:"GET"
-            },
-            query: {
-                type:{},
-                default:null
-            },
-            body: {
-                type:{},
-                default:null
-            },
-            headers: {
-                type:{},
-                default:null
-            }
-        },
+        type:DetailsSchema,
         default:null
-        
     }
 
 });
@@ -49,3 +48,4 @@ const CollectionSchema = new mongoose.Schema({
 const Collection = mongoose.model('Collection', CollectionSchema)
 
 module.exports = Collection
+module.exports.DetailsSchema = DetailsSchema;
