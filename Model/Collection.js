@@ -6,8 +6,8 @@ const DetailsSchema = new mongoose.Schema({
     },
     method: {
         type: String,
-        enum:["GET", "POST","PUT","DELETE"],
-        default:"GET"
+        enum:["get", "post","put","delete"],
+        default:"get"
     },
     query: {
         type:{},

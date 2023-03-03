@@ -18,11 +18,11 @@ module.exports = {
         try {
             // workspace_id , url and method is provide by user in body
             let created_by = req.decoded._id
-            let {workspace_id ,url , method , request_id} = req.body;
-            if(!workspace_id || !url || !method){
-                return res.status(200).json({ message: "workspace_id , url and method is required"});
+            let {workspace_id ,details , request_id} = req.body;
+            if(!workspace_id ||  !details){
+                return res.status(200).json({ message: "workspace_id , details is required"});
             }else{
-                let history = await History.create({workspace_id , url, method , created_by , request_id});
+                let history = await History.create({workspace_id , details , created_by , request_id});
                 return res.status(200).json({ message: "History Created Successfully", history: history });
             }
         } catch (error) {
