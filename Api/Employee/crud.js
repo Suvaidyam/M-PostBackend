@@ -44,8 +44,8 @@ module.exports = {
         }
     },
     updateImage: async (req, res) => {
-        const url = req.file?.path;
         try {
+            const url = req.file && req.file.path;
             let _id = req.decoded._id;
             let user = await User.findById(_id);
             if (user.url.length == '0') {
@@ -64,7 +64,7 @@ module.exports = {
                                 return res.status(400).json({ message: "Path not found", err });
                             }
                         });
-                        const url = req.file?.path;
+                        const url = req.file && req.file.path;
                         let user = await User.updateOne(req.params, { url });
                         return res.status(200).json({ message: "Image Successfully Uploaded", user: user });
                     }
