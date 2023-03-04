@@ -29,7 +29,7 @@ module.exports = {
    },
    deleteEnvironment: async(req,res)=>{
       try {
-            let environment = await Environment.remove(req.params);
+            let environment = await Environment.deleteOne(req.params);
             return res.status(200).json({ message: "Deleted Successfully", environment: environment });
       } catch (error) {
         return res.status(500).json({ message: error.message });
