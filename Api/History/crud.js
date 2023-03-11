@@ -7,9 +7,10 @@ module.exports = {
             if (!workspace_id) {
                 return res.status(200).json({ message: "workspace_id is required" });
             } else {
-                let history = await History.aggregate([{
-                    $match: { workspace_id: workspace_id }
-                },
+                let history = await History.aggregate([
+                //     {
+                //     $match: { workspace_id: workspace_id }
+                // },
                 {
                     $project: {
                         _id: 0, data: {
