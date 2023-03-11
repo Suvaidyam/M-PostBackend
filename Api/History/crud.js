@@ -15,15 +15,20 @@ module.exports = {
                     $project: {
                         _id: 0, data: {
                             "_id": "$_id",
+                            "type":"$type",
                             "created_At": {
                                 $dateToString: {
                                     format: "%H:%M:%S",
                                     date: "$created_At",
                                     timezone: "Asia/Kolkata"
                                 }
-                            }, "details": {
+                            },
+                             "details": {
                                 "url": "$details.url",
-                                "method": "$details.method"
+                                "method": "$details.method",
+                                "body":"$details.body",
+                                "query":"$details.query",
+                                "headers":"$details.headers"
                             }
                         }, "date": {
                             $dateToString:
