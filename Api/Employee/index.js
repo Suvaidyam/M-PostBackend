@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
+const path = require('path');
 
 const multer  = require('multer')
 
@@ -13,12 +15,13 @@ const storage = multer.diskStorage({
     }
   })
   
-  const upload = multer({ storage: storage })
+  const upload = multer({ storage: storage });
 
 const crud = require('./crud');
 router.get('/', crud.findAll);
 router.get('/:_id', crud.findById);
 router.post('/', crud.create);
-router.put('/:_id',upload.single('file'), crud.updateOne);
+router.put('/updateImage/:_id',upload.single('file'), crud.updateImage);
+router.delete('/deletePhoto',crud.deletePhoto);
 
 module.exports = router

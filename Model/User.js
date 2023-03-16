@@ -15,14 +15,13 @@ const userSchema = new mongoose.Schema({
     },
     url:{
         type:String,
-        default:null
+        default:""
     },
-    userType:{
+    gender:{
         type:String,
-        enum:["ADMIN", "COMPANY_ADMIN","EMPLOYEE"],
-        default:"COMPANY_ADMIN"
-    },
-    company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' }, // Reference of Company schema
+        enum:["male", "female","other"],
+        require: true
+    }
 });
 
 const User = mongoose.model('user', userSchema)
