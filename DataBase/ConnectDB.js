@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { DB_URI_STRING } = process.env;
-// Connect MongoDB at default port 27017.
 // console.log(DB_URI_STRING);
 mongoose.connect(DB_URI_STRING, {
 
