@@ -16,7 +16,7 @@ const OtpGenerate = async (req, res) => {
       await otpData.save();
       sendemail.send(email, otpCode);
 
-      return res.status(200).json({ message: "Plese check your email" });
+      return res.status(200).json({ message: "OTP sended to Register Email" });
     } else {
       return res.status(404).json({ message: "Email Id not Exist" });
     }
