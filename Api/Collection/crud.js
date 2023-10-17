@@ -2,8 +2,9 @@ const Collection = require("../../Model/Collection");
 module.exports = {
   getCollection: async (req, res) => {
     try {
-      // let collection = await Collection.find(req.params);
-      let collection = await Collection.find();
+      // console.log(req.query)
+      let collection = await Collection.find(req.query);
+      // let collection = await Collection.find();
       return res
         .status(200)
         .json({ message: "Collection list", collection: collection });
