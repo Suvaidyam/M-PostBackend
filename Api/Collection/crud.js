@@ -2,8 +2,18 @@ const Collection = require("../../Model/Collection");
 module.exports = {
   getCollection: async (req, res) => {
     try {
-      // console.log(req.query)
-      let collection = await Collection.find(req.query);
+      let collection = await Collection.find(req.params);
+      // let collection = await Collection.find();
+      return res
+        .status(200)
+        .json({ message: "Collection list", collection: collection });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  },
+  getCollectionById: async (req, res) => {
+    try {
+      let collection = await Collection.find(req.params);
       // let collection = await Collection.find();
       return res
         .status(200)
@@ -52,8 +62,26 @@ module.exports = {
       return res.status(500).json({ message: error.message });
     }
   },
+  putResponse: async (req, res) => {
+    try {
+      // Find the Collection by _id
+      const collection = await Collection.findById(req.params);
+      if (!collection) {
+        throw new Error("Collection not found");
+      }
+      // Update the response field in the DetailsSchema
+      collection.details.response = req.body;
+      // Save the updated Collection
+      await collection.save();
+      return res
+        .status(200)
+        .json({ message: "Update Successfully", collection: collection });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  },
   deleteCollection: async (req, res) => {
-    const {_id} = req.params;
+    const { _id } = req.params;
     try {
       let collection = await Collection.deleteOne({
         $or: [{ _id: _id }, { parent: _id }],
