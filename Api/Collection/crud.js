@@ -13,11 +13,10 @@ module.exports = {
   },
   getCollectionById: async (req, res) => {
     try {
-      let collection = await Collection.find(req.params);
-      // let collection = await Collection.find();
+      let collection = await Collection.findOne(req.params);
       return res
         .status(200)
-        .json({ message: "Collection list", collection: collection });
+        .json({ message: "Collection list", collection });
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
@@ -53,8 +52,8 @@ module.exports = {
   putCollection: async (req, res) => {
     try {
       let collection = await Collection.updateOne(req.params, req.body);
-      console.log(req.params)
-      console.log(req.body)
+      // console.log(req.params)
+      // console.log(req.body)
       return res
         .status(200)
         .json({ message: "Update Successfully", collection: collection });

@@ -5,6 +5,7 @@ const JWT_SECRET = 'fhjkdfghdfgjkdfjkhgjkdfgj';
 module.exports = async (req, res, next) => {
     try {
         let { token } = req.headers;
+        console.log(token)
         if (token) {
             let decoded = JWT.verify(token, JWT_SECRET);
             // console.log('veryToken', decoded);
