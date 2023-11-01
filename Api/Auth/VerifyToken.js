@@ -7,10 +7,7 @@ module.exports = async (req, res, next) => {
         let { token } = req.headers;
         if (token) {
             let decoded = JWT.verify(token, JWT_SECRET);
-            // console.log('veryToken', decoded);
             let { lhId,  email, _id , gender} = decoded;
-            // console.log(decoded)
-
             let loginHistory = await LoginHistory.findById(lhId);
             if(!loginHistory){
                 return res.status(401).json({ message: 'Unauthorized: Login history not found' });

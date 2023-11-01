@@ -55,8 +55,6 @@ module.exports = {
   putCollection: async (req, res) => {
     try {
       let collection = await Collection.updateOne(req.params, req.body);
-      // console.log(req.params)
-      // console.log(req.body)
       return res
         .status(200)
         .json({ message: "Update Successfully", collection: collection });

@@ -13,7 +13,6 @@ const Login = async (req, res) => {
             if (userEmail) {
                 let user = await User.findOne({ email, password });
                 if (user) {
-                    // console.log(user);
                     let loginHistory = await LoginHistory.create({ user: user._id });
                     let token = JWT.sign({
                         _id: user._id,
