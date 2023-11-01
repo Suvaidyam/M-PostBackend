@@ -12,18 +12,7 @@ module.exports = {
       return res.status(500).json({ message: error.message });
     }
   },
-  getCollections: async (req, res) => {
-    try {
-      let collection = await Collection.find();
-      // let collection = await Collection.find();
-      console.log(req.params)
-      return res
-        .status(200)
-        .json({ message: "Collection list", collection: collection });
-    } catch (error) {
-      return res.status(500).json({ message: error.message });
-    }
-  },
+ 
   getCollectionById: async (req, res) => {
     try {
       let collection = await Collection.findOne(req.params);
