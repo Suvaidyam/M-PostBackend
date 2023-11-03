@@ -4,7 +4,6 @@ module.exports = {
     try {
       let collection = await Collection.find(req.params);
       // let collection = await Collection.find();
-      console.log(req.params)
       return res
         .status(200)
         .json({ message: "Collection list", collection: collection });
@@ -26,7 +25,6 @@ module.exports = {
   postCollection: async (req, res) => {
     let created_by = req.decoded._id;
     let { name, type, parent, url, method, details, workspace_id } = req.body;
-    console.log(type)
     try {
       if (type) {
         let collection = await Collection.create({

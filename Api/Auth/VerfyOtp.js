@@ -11,12 +11,12 @@ const VerifyOtp = async (req, res) => {
         await Otp.deleteOne({ otpCode, email });
         return res.status(200).json({ message: "OTP Expire" });
       }
-      return res.status(200).json({ message: "OTP verifyed" });
+      return res.status(200).json({ message: "OTP verified" });
     } else {
-      return res.status(200).json({ message: "Invalide OTP" });
+      return res.status(200).json({ message: "Invalid OTP" });
     }
   } catch (error) {
-    return res.status(500).json({ message: "Invalide OTP ", error });
+    return res.status(500).json({ message: "Invalid OTP ", error });
   }
 };
 
