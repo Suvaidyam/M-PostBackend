@@ -24,7 +24,12 @@ const DetailsSchema = new mongoose.Schema({
     response: {
         type: {},
         default: null
+    },
+    responseHeaders: {
+        type: {},
+        default: null
     }
+
 })
 const CollectionSchema = new mongoose.Schema({
     name: {
