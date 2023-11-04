@@ -21,6 +21,10 @@ const DetailsSchema = new mongoose.Schema({
         type: {},
         default: null
     },
+    bodyimg: {
+        type: {},
+        default: null
+    },
     response: {
         type: {},
         default: null
