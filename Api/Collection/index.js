@@ -22,6 +22,7 @@ router.get('/getById/:_id', crud.getCollectionById);
 router.post('/',upload.single('image'), crud.postCollection);
 router.put('/:_id', crud.putCollection);
 router.put('/res/:_id', crud.putResponse);
+router.put('/resHeaders/:_id', crud.putResponseHeaders);
 router.delete('/:_id', crud.deleteCollection);
 
 module.exports = router;
