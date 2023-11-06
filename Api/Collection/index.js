@@ -13,13 +13,11 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-
-
 const crud = require('./crud');
 router.get('/:workspace_id', crud.getCollection);
 router.get('/getById/:_id', crud.getCollectionById);
 // router.get('/', crud.getCollection);
-router.post('/',upload.single('image'), crud.postCollection);
+router.post('/', upload.single('img'), crud.postCollection);
 router.put('/:_id', crud.putCollection);
 router.put('/res/:_id', crud.putResponse);
 router.put('/resHeaders/:_id', crud.putResponseHeaders);

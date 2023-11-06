@@ -21,10 +21,7 @@ const DetailsSchema = new mongoose.Schema({
         type: {},
         default: null
     },
-    bodyimg: {
-        type: {},
-        default: null
-    },
+
     response: {
         type: {},
         default: null
@@ -47,6 +44,10 @@ const CollectionSchema = new mongoose.Schema({
     type: {
         type: String,
         enum: ["collection", "folder", "request"],
+        required: true
+    },
+    bodyimg: {
+        type: String,
         required: true
     },
     created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },

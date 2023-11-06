@@ -11,7 +11,7 @@ module.exports = {
       return res.status(500).json({ message: error.message });
     }
   },
- 
+
   getCollectionById: async (req, res) => {
     try {
       let collection = await Collection.findOne(req.params);
@@ -25,6 +25,8 @@ module.exports = {
   postCollection: async (req, res) => {
     let created_by = req.decoded._id;
     let { name, type, parent, url, method, details, workspace_id } = req.body;
+    let bodyimg = req.file && req.file.path
+    console.log(bodyimg)
     try {
       if (type) {
         let collection = await Collection.create({
@@ -35,6 +37,7 @@ module.exports = {
           method,
           created_by,
           details,
+          bodyimg,
           workspace_id,
         });
         return res
