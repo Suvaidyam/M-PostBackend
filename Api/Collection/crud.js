@@ -2,7 +2,14 @@ const Collection = require("../../Model/Collection");
 module.exports = {
   getCollection: async (req, res) => {
     try {
-      let collection = await Collection.find(req.params);
+      let condition = {
+            ...req.params,
+            $or:[
+                {created_by:_id},
+                {share:_id}
+            ]
+        }
+      let collection = await Collection.find(condition);
       // let collection = await Collection.find();
       return res
         .status(200)

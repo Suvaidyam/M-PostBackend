@@ -3,8 +3,14 @@ const Environment = require('../../Model/Environment');
 module.exports = {
     findWorkSpace: async (req, res) => {
         let _id = req.decoded._id;
+        let condition = {
+            $or:[
+                {created_by:_id},
+                {share:_id}
+            ]
+        }
         try {
-            let workSpace = await WorkSpace.find({created_by:_id});
+            let workSpace = await WorkSpace.find(condition);
             return res.status(200).json({ message: "workSpace List", workSpace: workSpace });
         } catch (error) {
             return res.status(500).json({ message: error.message });

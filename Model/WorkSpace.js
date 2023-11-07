@@ -10,8 +10,11 @@ const WorkSpaceSchema = new mongoose.Schema({
         type:String,
         enum:["PERSONAL", "TEAM","PUBLIC"],
         default:"PERSONAL"
-    }
- 
+    },
+    share:{
+        type:[{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+        default:[]
+    },
 });
 
 const WorkSpace = mongoose.model('WorkSpace', WorkSpaceSchema)
