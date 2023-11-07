@@ -1,16 +1,16 @@
 const nodemailer = require("nodemailer");
 
 module.exports = {
-  send: (email, otpCode) => {
-    var transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "aniket.suvaidyam@gmail.com",
-        pass: "zjzyesejdrdlxgjx",
-      },
-    });
-    
-    const message = `
+    send: (email, otpCode) => {
+        var transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "noreply.suvaidyam@gmail.com",
+                pass: "nsws oyay otpu fkoc",
+            },
+        });
+
+        const message = `
     <!DOCTYPE html>
 <html lang="en">
 
@@ -175,7 +175,7 @@ module.exports = {
             <img class="logo" src="https://yt3.ggpht.com/VwODWkAsZZK1PMnWvvBuoKrmCMjxPCVpOrNWoUWc16mN0xwBBjtauJc8TfWzplHliYkrrVM82Q=s176-c-k-c0x00ffffff-no-rj-mo" alt="">
             <div class="card">
                 <p class="card-head">Hii,</p>
-                <p class="card-title">Thank you for choosing M-Post. <#> <strong><span class="otp">${JSON.stringify( otpCode )}</span></strong>
+                <p class="card-title">Thank you for choosing M-Post. <#> <strong><span class="otp">${JSON.stringify(otpCode)}</span></strong>
                         is your M-Post (OTP) to verify your email to forget password. Valid for next 5 mins.</p>
             </div>
 
@@ -206,18 +206,18 @@ module.exports = {
 
 </html>
 `;
-    var mailoptions = {
-      from: "tech@suvaidyam.com",
-      to: email,
-      subject: "Your verification  OTP ",
-      html: message,
-    };
-    transporter.sendMail(mailoptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
-  },
+        var mailoptions = {
+            from: "tech@suvaidyam.com",
+            to: email,
+            subject: "Your verification  OTP ",
+            html: message,
+        };
+        transporter.sendMail(mailoptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Email sent: " + info.response);
+            }
+        });
+    },
 };
