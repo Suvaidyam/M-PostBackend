@@ -1,14 +1,16 @@
 const Collection = require("../../Model/Collection");
 module.exports = {
   getCollection: async (req, res) => {
+
     try {
+      let _id = req.decoded._id;
       let condition = {
-            ...req.params,
-            $or:[
-                {created_by:_id},
-                {share:_id}
-            ]
-        }
+        ...req.params,
+        $or: [
+          { created_by: _id },
+          { share: _id }
+        ]
+      }
       let collection = await Collection.find(condition);
       // let collection = await Collection.find();
       return res
@@ -32,8 +34,6 @@ module.exports = {
   postCollection: async (req, res) => {
     let created_by = req.decoded._id;
     let { name, type, parent, url, method, details, workspace_id } = req.body;
-    let bodyimg = req.file && req.file.path
-    console.log(bodyimg)
     try {
       if (type) {
         let collection = await Collection.create({
@@ -44,7 +44,6 @@ module.exports = {
           method,
           created_by,
           details,
-          bodyimg,
           workspace_id,
         });
         return res

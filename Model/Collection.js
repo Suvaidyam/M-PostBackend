@@ -46,10 +46,10 @@ const CollectionSchema = new mongoose.Schema({
         enum: ["collection", "folder", "request"],
         required: true
     },
-    bodyimg: {
-        type: String,
-        required: true
-    },
+    // bodyimg: {
+    //     type: String,
+    //     required: true
+    // },
     created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     workspace_id: { type: mongoose.Schema.Types.ObjectId, ref: 'WorkSpace', required: true },
     share:{

@@ -1,6 +1,6 @@
 const LoginHistory = require('../../Model/LoginHistory');
 const JWT = require('jsonwebtoken');
-const JWT_SECRET = 'fhjkdfghdfgjkdfjkhgjkdfgj';
+const { JWT_SECRET } = process.env;
 
 module.exports = async (req, res, next) => {
     try {
