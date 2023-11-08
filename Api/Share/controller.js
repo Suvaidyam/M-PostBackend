@@ -30,11 +30,12 @@ module.exports = {
             if (!workspace) {
                 return res.status(400).json({ message: "workspace not found" })
             }
-
             const { JWT_SECRET } = process.env;
             let token = await jwt.sign({ _id, type: 'workspace' }, JWT_SECRET);
             let { BASE_URL } = process.env
-            return url = `${BASE_URL}/join/workspace/${_id}?token=${token}`
+            const url = `${BASE_URL}/join/workspace/${_id}?token=${token}`
+            return res.status(200).json({ url });
+            // return url = `${BASE_URL}/join/workspace/${_id}?token=${token}`
         } catch (error) {
             return res.status(400).json({ message: error.message })
         }
@@ -71,7 +72,6 @@ module.exports = {
             let token = await jwt.sign({ _id, type: 'collection' }, JWT_SECRET);
             let { BASE_URL } = process.env
             const url = `${BASE_URL}/join/collection/${_id}?token=${token}`;
-            console.log(url)
             return res.status(200).json({ url });
             // return url = `${BASE_URL}/join/collection/${_id}?token=${token}`
         } catch (error) {
