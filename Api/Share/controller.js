@@ -2,78 +2,80 @@ const WorkSpace = require('../../Model/WorkSpace')
 const Collection = require('../../Model/Collection')
 const jwt = require('jsonwebtoken')
 module.exports = {
-    share_workspace_with_team:async(req, res, next)=>{
+    share_workspace_with_team: async (req, res, next) => {
         try {
-            let {workspace} = req.params;
-            let {team} = req.body;
+            let { workspace } = req.params;
+            let { team } = req.body;
 
         } catch (error) {
 
         }
     },
-    share_workspace_with_individuals:async(req, res, next)=>{
+    share_workspace_with_individuals: async (req, res, next) => {
         try {
-            let {workspace} = req.params;
-            let {emails} = req.body;
+            let { workspace } = req.params;
+            let { emails } = req.body;
 
         } catch (error) {
 
         }
     },
-    share_workspace_with_url:async(req, res, next)=>{
+    share_workspace_with_url: async (req, res, next) => {
         try {
-            let {_id} = req.params;
-            if(!_id){
-                return res.status(400).json({message:"workspace is required field"})
+            let { _id } = req.params;
+            if (!_id) {
+                return res.status(400).json({ message: "workspace is required field" })
             }
             let workspace = await WorkSpace.findById(_id)
-            if(!workspace){
-                return res.status(400).json({message:"workspace not found"})
+            if (!workspace) {
+                return res.status(400).json({ message: "workspace not found" })
             }
 
-            const {JWT_SECRET} = process.env
-            let token = await jwt.sign({_id, type:'workspace'}, JWT_SECRET);
-            let {BASE_URL} = process.env
+            const { JWT_SECRET } = process.env;
+            let token = await jwt.sign({ _id, type: 'workspace' }, JWT_SECRET);
+            let { BASE_URL } = process.env
             return url = `${BASE_URL}/join/workspace/${_id}?token=${token}`
         } catch (error) {
-            return res.status(400).json({message:error.message})
+            return res.status(400).json({ message: error.message })
         }
     },
-    share_collection_with_team:async(req, res, next)=>{
+    share_collection_with_team: async (req, res, next) => {
         try {
-            let {collection} = req.params;
-            let {team} = req.body;
+            let { collection } = req.params;
+            let { team } = req.body;
 
         } catch (error) {
 
         }
     },
-    share_collection_with_individuals:async(req, res, next)=>{
+    share_collection_with_individuals: async (req, res, next) => {
         try {
-            let {collection} = req.params;
-            let {emails} = req.body;
+            let { collection } = req.params;
+            let { emails } = req.body;
 
         } catch (error) {
 
         }
     },
-    share_collection_with_url:async(req, res, next)=>{
+    share_collection_with_url: async (req, res, next) => {
         try {
-            let {_id} = req.params;
-            if(!_id){
-                return res.status(400).json({message:"collection is required field"})
+            let { _id } = req.params;
+            if (!_id) {
+                return res.status(400).json({ message: "collection is required field" })
             }
-            let collection = await Collection.findById(collection)
-            if(!collection){
-                return res.status(400).json({message:"collection not found"})
+            let collection = await Collection.findById(_id)
+            if (!collection) {
+                return res.status(400).json({ message: "collection not found" })
             }
-
-            const {JWT_SECRET} = process.env
-            let token = await jwt.sign({_id, type:'collection'}, JWT_SECRET);
-            let {BASE_URL} = process.env
-            return url = `${BASE_URL}/join/collection/${_id}?token=${token}`
+            const { JWT_SECRET } = process.env
+            let token = await jwt.sign({ _id, type: 'collection' }, JWT_SECRET);
+            let { BASE_URL } = process.env
+            const url = `${BASE_URL}/join/collection/${_id}?token=${token}`;
+            console.log(url)
+            return res.status(200).json({ url });
+            // return url = `${BASE_URL}/join/collection/${_id}?token=${token}`
         } catch (error) {
-            return res.status(400).json({message:error.message})
+            return res.status(400).json({ message: error.message })
         }
     },
 };

@@ -5,7 +5,7 @@ const sendemail = require("../../Services/Email");
 const OtpGenerate = async (req, res) => {
   try {
     let email = req.body.email;
-    console.log(email)
+    // console.log(email)
     let data = await User.findOne({ email });
     if (data) {
       let otpCode = Math.floor(1000 + Math.random() * 9000);
