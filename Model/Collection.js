@@ -52,9 +52,9 @@ const CollectionSchema = new mongoose.Schema({
     // },
     created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     workspace_id: { type: mongoose.Schema.Types.ObjectId, ref: 'WorkSpace', required: true },
-    share:{
-        type:[{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-        default:[]
+    share: {
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+        default: []
     },
     details: {
         type: DetailsSchema,
