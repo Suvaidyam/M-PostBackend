@@ -1,5 +1,6 @@
 const WorkSpace = require('../../Model/WorkSpace')
 const Collection = require('../../Model/Collection')
+const JWT = require('jsonwebtoken')
 module.exports = {
     join_team_with_url: async (req, res, next) => {
         try {
@@ -30,7 +31,7 @@ module.exports = {
         try {
             let { token } = req.params;
             let { JWT_SECRET } = process.env;
-            let { _id, type } = await JWT.verify(token, JWT_SECRET);
+            let { _id, type } = JWT.verify(token, JWT_SECRET);
             let collection = await Collection.findById(_id);
             if (!collection) {
                 return res.status(400).json({ message: 'Collection not found.' })
