@@ -6,18 +6,14 @@ module.exports = {
         try {
             let { workspace } = req.params;
             let { team } = req.body;
-
         } catch (error) {
-
         }
     },
     share_workspace_with_individuals: async (req, res, next) => {
         try {
             let { workspace } = req.params;
             let { emails } = req.body;
-
         } catch (error) {
-
         }
     },
     share_workspace_with_url: async (req, res, next) => {
@@ -44,18 +40,14 @@ module.exports = {
         try {
             let { collection } = req.params;
             let { team } = req.body;
-
         } catch (error) {
-
         }
     },
     share_collection_with_individuals: async (req, res, next) => {
         try {
             let { collection } = req.params;
             let { emails } = req.body;
-
         } catch (error) {
-
         }
     },
     share_collection_with_url: async (req, res, next) => {

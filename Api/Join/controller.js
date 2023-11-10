@@ -37,8 +37,9 @@ module.exports = {
                 return res.status(400).json({ message: 'Collection not found.' })
             }
             let user_id = req.decoded._id;
+            console.log(user_id)
             let join = await Collection.updateOne({ _id: collection._id }, { $addToSet: { share: user_id } });
-            return res.status(200).json({ message: 'Collection is added.' });
+            return res.status(200).json({ message: 'Collection is added.', join: join });
         } catch (error) {
             // return res.status(400).json({ message: error.message });
             return res.status(400).json({ message: error });
