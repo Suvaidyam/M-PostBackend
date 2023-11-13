@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const crud = require('./crud');
+router.get('/allWorkSpace', crud.findAllWorkSpace);
 router.get('/', crud.findWorkSpace);
 router.put('/:_id', crud.putWorkSpace);
 router.post('/', crud.postWorkSpace);
