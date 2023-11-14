@@ -14,7 +14,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 const crud = require('./crud');
+router.get('/allCollection', crud.getAllCollection);
 router.get('/:workspace_id', crud.getCollection);
+router.get('/', crud.getCollection);
 router.get('/getById/:_id', crud.getCollectionById);
 // router.get('/', crud.getCollection);
 router.post('/', upload.single('img'), crud.postCollection);
