@@ -12,7 +12,6 @@ module.exports = {
         ]
       }
       let collection = await Collection.find(condition);
-      // let collection = await Collection.find();
       return res
         .status(200)
         .json({ message: "Collection list", collection: collection });
@@ -45,26 +44,47 @@ module.exports = {
     let created_by = req.decoded._id;
     let { name, type, parent, url, method, details, workspace_id } = req.body;
     try {
+      let newName;
       if (type) {
-        let collection = await Collection.create({
-          name,
-          type,
-          parent,
-          url,
-          method,
-          created_by,
-          details,
-          workspace_id,
-        });
-        return res
-          .status(200)
-          .json({
-            message: name + " Created Successfully",
-            collection: collection,
-          });
+        // ============================= random name logic ====================================
+        const exist = await Collection.findOne({ name, created_by, workspace_id }, { _id: 1, name: 1 });
+        if (exist !== null) {
+          // console.log(exist.name.split(' ').length);
+          newName = `${name} 1`;
+        } else {
+          newName = name;
+        }
+        let nameExists = true;
+        do {
+          const exist2 = await Collection.findOne({ name: newName, created_by, workspace_id }, { _id: 1, name: 1 });
+          if (exist2) {
+            if (exist2.name.split(' ').length === 3) {
+              newName = `${name} ${Number(exist2.name.split(' ')[2]) + 1}`;
+            } else {
+              newName = `${name} 1`;
+            }
+          } else {
+            nameExists = false;
+          }
+        } while (nameExists);
+        // ============================= random name logic ====================================
       } else {
         return res.status(400).json({ message: "File Type Required" });
       }
+      let collection = await Collection.create({
+        name: newName,
+        type,
+        parent,
+        url,
+        method,
+        created_by,
+        details,
+        workspace_id,
+      });
+      return res.status(200).json({
+        message: name + " Created Successfully",
+        collection: collection,
+      });
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
@@ -118,7 +138,7 @@ module.exports = {
   deleteCollection: async (req, res) => {
     const { _id } = req.params;
     try {
-      let collection = await Collection.deleteOne({
+      let collection = await Collection.deleteMany({
         $or: [{ _id: _id }, { parent: _id }],
       });
       return res
