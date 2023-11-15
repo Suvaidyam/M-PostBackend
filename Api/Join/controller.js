@@ -32,12 +32,12 @@ module.exports = {
             let { token } = req.params;
             let { JWT_SECRET } = process.env;
             let { _id, type } = JWT.verify(token, JWT_SECRET);
-            let collection = await Collection.findById(_id);
+            let collection = await Collection.findById(_id, { name: 1 });
+            console.log(collection)
             if (!collection) {
                 return res.status(400).json({ message: 'Collection not found.' })
             }
             let user_id = req.decoded._id;
-            console.log(user_id)
             let join = await Collection.updateOne({ _id: collection._id }, { $addToSet: { share: user_id } });
             return res.status(200).json({ message: 'Collection is added.', join: join });
         } catch (error) {
