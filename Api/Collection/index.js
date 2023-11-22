@@ -18,6 +18,7 @@ router.get('/allCollection', crud.getAllCollection);
 router.get('/:workspace_id', crud.getCollection);
 router.get('/', crud.getCollection);
 router.put('/softDeleteCollection/:_id', crud.softDeleteCollection);
+router.put('/restore/:_id', crud.restore);
 router.get('/getById/:_id', crud.getCollectionById);
 // router.get('/', crud.getCollection);
 router.post('/', upload.single('img'), crud.postCollection);
