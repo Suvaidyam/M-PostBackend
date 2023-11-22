@@ -19,7 +19,6 @@ const WorkSpaceSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    // deleted_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
 const WorkSpace = mongoose.model('WorkSpace', WorkSpaceSchema)

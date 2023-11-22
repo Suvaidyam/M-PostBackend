@@ -21,7 +21,6 @@ const DetailsSchema = new mongoose.Schema({
         type: {},
         default: null
     },
-
     response: {
         type: {},
         default: null
@@ -29,8 +28,11 @@ const DetailsSchema = new mongoose.Schema({
     responseHeaders: {
         type: {},
         default: null
-    }
-
+    },
+    deleted: {
+        type: Boolean,
+        default: false
+    },
 })
 const CollectionSchema = new mongoose.Schema({
     name: {
@@ -51,6 +53,10 @@ const CollectionSchema = new mongoose.Schema({
     share: {
         type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
         default: []
+    },
+    deleted: {
+        type: Boolean,
+        default: false
     },
     details: {
         type: DetailsSchema,

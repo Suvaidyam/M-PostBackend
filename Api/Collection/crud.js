@@ -1,7 +1,6 @@
 const Collection = require("../../Model/Collection");
 module.exports = {
   getCollection: async (req, res) => {
-
     try {
       let _id = req.decoded._id;
       let condition = {
@@ -9,7 +8,8 @@ module.exports = {
         $or: [
           { created_by: _id },
           { share: _id }
-        ]
+        ],
+        deleted: false
       }
       let collection = await Collection.find(condition);
       return res
@@ -95,6 +95,17 @@ module.exports = {
       return res
         .status(200)
         .json({ message: "Update Successfully", collection: collection });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  },
+  // ==================================== Soft Delete function ====================================
+  softDeleteCollection: async (req, res) => {
+    try {
+      let collection = await Collection.findByIdAndUpdate(req.params, { $set: { deleted: true } }, { new: true });
+      return res
+        .status(200)
+        .json({ message: "Delete Successfully", collection: collection });
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
