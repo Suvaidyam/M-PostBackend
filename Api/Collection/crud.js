@@ -110,6 +110,16 @@ module.exports = {
       return res.status(500).json({ message: error.message });
     }
   },
+  restore: async (req, res) => {
+    try {
+      let collection = await Collection.findByIdAndUpdate(req.params, { $set: { deleted: false } }, { new: false });
+      return res
+        .status(200)
+        .json({ message: "Successfully Restore", collection: collection });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  },
   putResponse: async (req, res) => {
     try {
       // Find the Collection by _id
