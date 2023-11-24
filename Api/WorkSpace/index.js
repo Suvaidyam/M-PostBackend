@@ -6,6 +6,7 @@ router.get('/allWorkSpace', crud.findAllWorkSpace);
 router.get('/', crud.findWorkSpace);
 router.put('/:_id', crud.putWorkSpace);
 router.put('/softPutWorkSpace/:_id', crud.softPutWorkSpace);
+router.put('/restoreWorkSpace/:_id', crud.restoreWorkSpace);
 router.post('/', crud.postWorkSpace);
 router.delete('/:_id', crud.deleteWorkSpace);
 

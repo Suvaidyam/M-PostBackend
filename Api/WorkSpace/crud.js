@@ -53,11 +53,19 @@ module.exports = {
     },
     // ============== softPutWorkSpace ==============
     softPutWorkSpace: async (req, res) => {
-        console.log(req.params)
         try {
             // let { name, visibility } = req.body;
             let workSpace = await WorkSpace.findByIdAndUpdate(req.params, { $set: { deleted: true } }, { new: true });
             return res.status(200).json({ message: "Delete Successfully", workSpace: workSpace });
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    },
+    // ============== Restore WorkSpace ==============
+    restoreWorkSpace: async (req, res) => {
+        try {
+            let workSpace = await WorkSpace.findByIdAndUpdate(req.params, { $set: { deleted: false } }, { new: false });
+            return res.status(200).json({ message: "Restore Successfully", workSpace: workSpace });
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
