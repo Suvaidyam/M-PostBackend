@@ -102,14 +102,33 @@ module.exports = {
   // ==================================== Soft Delete function ====================================
   softDeleteCollection: async (req, res) => {
     try {
-      let collection = await Collection.findByIdAndUpdate(req.params, { $set: { deleted: true } }, { new: true });
-      return res
-        .status(200)
-        .json({ message: "Delete Successfully", collection: collection });
+      const _id = req.params;
+      await Collection.updateMany(
+        { $or: [{ _id: _id }, { parent: _id }] },
+        { $set: { deleted: true } }
+      );
+      // Fetch the updated documents
+      const updatedCollection = await Collection.find({
+        $or: [{ _id: _id }, { parent: _id }],
+      });
+      return res.status(200).json({ message: "Delete Successfully", collection: updatedCollection });
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
   },
+  // softDeleteCollection: async (req, res) => {
+  //   try {
+  //     let putCollection = await Collection.findByIdAndUpdate({
+  //      [{ _id: req.params }, { parent: req.params }]
+  //     });
+  //     let collection = await Collection.findByIdAndUpdate(putCollection, { $set: { deleted: true } }, { new: true });
+  //     return res
+  //       .status(200)
+  //       .json({ message: "Delete Successfully", collection: collection });
+  //   } catch (error) {
+  //     return res.status(500).json({ message: error.message });
+  //   }
+  // },
   restore: async (req, res) => {
     try {
       let collection = await Collection.findByIdAndUpdate(req.params, { $set: { deleted: false } }, { new: false });
