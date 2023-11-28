@@ -19,6 +19,10 @@ const WorkSpaceSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    permission: {
+        type: String,
+        default: null
+    }
 });
 
 const WorkSpace = mongoose.model('WorkSpace', WorkSpaceSchema)
