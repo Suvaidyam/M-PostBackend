@@ -118,10 +118,7 @@ module.exports = {
   },
   // softDeleteCollection: async (req, res) => {
   //   try {
-  //     let putCollection = await Collection.findByIdAndUpdate({
-  //      [{ _id: req.params }, { parent: req.params }]
-  //     });
-  //     let collection = await Collection.findByIdAndUpdate(putCollection, { $set: { deleted: true } }, { new: true });
+  //     let collection = await Collection.findByIdAndUpdate(req.params, { $set: { deleted: true } }, { new: true });
   //     return res
   //       .status(200)
   //       .json({ message: "Delete Successfully", collection: collection });
