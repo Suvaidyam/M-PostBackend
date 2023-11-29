@@ -44,11 +44,19 @@ module.exports = {
             }
             let user_id = req.decoded._id;
             // let join = await Collection.updateOne({ _id: collection._id }, { permission: permissions }, { $addToSet: { share: user_id }, $set: { permission: permissions } });
+            // const join = await Collection.updateOne(
+            //     { _id: collection._id },
+            //     {
+            //         $addToSet: { share: user_id },
+            //         $set: { permission: permissions },
+            //     }
+            // );
             const join = await Collection.updateOne(
                 { _id: collection._id },
                 {
-                    $addToSet: { share: user_id },
-                    $set: { permission: permissions },
+                    $addToSet: {
+                        share: [{ shareId: user_id, permission: permissions }]
+                    }
                 }
             );
             return res.status(200).json({ message: 'Collection is added.', join: join });

@@ -7,7 +7,7 @@ module.exports = {
         ...req.params,
         $or: [
           { created_by: _id },
-          { share: _id }
+          { share: { shareId: _id } }
         ],
         deleted: false
       }
@@ -42,7 +42,8 @@ module.exports = {
   },
   postCollection: async (req, res) => {
     let created_by = req.decoded._id;
-    let { name, type, parent, url, method, details, workspace_id } = req.body;
+    let { name, type, parent, url, method, details, workspace_id, share } = req.body;
+    console.log(share)
     try {
       let newName;
       if (type) {
@@ -77,6 +78,7 @@ module.exports = {
         parent,
         url,
         method,
+        share,
         created_by,
         details,
         workspace_id,
