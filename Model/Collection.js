@@ -48,14 +48,23 @@ const CollectionSchema = new mongoose.Schema({
         enum: ["collection", "folder", "request"],
         required: true
     },
-    permission: {
-        type: String,
-        default: null
-    },
     created_by: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     workspace_id: { type: mongoose.Schema.Types.ObjectId, ref: 'WorkSpace', required: true },
+    // share: {
+    //     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    //     default: []
+    // },
     share: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+        type: [{
+            shareId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            permission: {
+                type: String,
+                default: null
+            }
+        }],
         default: []
     },
     deleted: {
