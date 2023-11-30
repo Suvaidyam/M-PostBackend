@@ -27,7 +27,7 @@ module.exports = {
                 return res.status(400).json({ message: "workspace not found" })
             }
             const { JWT_SECRET } = process.env;
-            let token = await jwt.sign({ _id, permissions: access, type: 'workspace' }, JWT_SECRET);
+            let token = await jwt.sign({ _id, permissions: access, sharing: share, type: 'workspace' }, JWT_SECRET);
             let { BASE_URL } = process.env
             const url = `${BASE_URL}/join/workspace/${_id}?token=${token}`
             return res.status(200).json({ url });
@@ -52,7 +52,7 @@ module.exports = {
     },
     share_collection_with_url: async (req, res, next) => {
         try {
-            let { _id, access } = req.params;
+            let { _id, access, share } = req.params;
             if (!_id) {
                 return res.status(400).json({ message: "collection is required field" })
             }
@@ -61,7 +61,7 @@ module.exports = {
                 return res.status(400).json({ message: "collection not found" })
             }
             const { JWT_SECRET } = process.env
-            let token = await jwt.sign({ _id, permissions: access, type: 'collection' }, JWT_SECRET);
+            let token = await jwt.sign({ _id, permissions: access, sharing: share, type: 'collection' }, JWT_SECRET);
             let { BASE_URL } = process.env
             const url = `${BASE_URL}/join/collection/${_id}?token=${token}`;
             return res.status(200).json({ url });

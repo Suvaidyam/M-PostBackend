@@ -63,6 +63,10 @@ const CollectionSchema = new mongoose.Schema({
             permission: {
                 type: String,
                 default: null
+            },
+            sharing: {
+                type: Boolean,
+                default: false
             }
         }],
         default: []

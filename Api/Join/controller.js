@@ -13,7 +13,7 @@ module.exports = {
         try {
             let { token } = req.params;
             let { JWT_SECRET } = process.env;
-            let { _id, permissions, type } = await JWT.verify(token, JWT_SECRET);
+            let { _id, permissions, sharing, type } = await JWT.verify(token, JWT_SECRET);
             console.log(permissions)
             let workspace = await WorkSpace.findById(_id);
             if (!workspace) {
@@ -24,8 +24,9 @@ module.exports = {
             const join = await WorkSpace.updateOne(
                 { _id: workspace._id },
                 {
-                    $addToSet: { share: user_id },
-                    $set: { permission: permissions },
+                    $addToSet: {
+                        share: [{ shareId: user_id, permission: permissions, sharing: sharing }]
+                    }
                 }
             );
             return res.status(200).json({ message: 'workspace is added.' });
@@ -37,7 +38,7 @@ module.exports = {
         try {
             let { token } = req.params;
             let { JWT_SECRET } = process.env;
-            let { _id, permissions, type } = JWT.verify(token, JWT_SECRET);
+            let { _id, permissions, sharing, type } = JWT.verify(token, JWT_SECRET);
             let collection = await Collection.findById(_id, { name: 1 });
             if (!collection) {
                 return res.status(400).json({ message: 'Collection not found.' })
@@ -55,7 +56,7 @@ module.exports = {
                 { _id: collection._id },
                 {
                     $addToSet: {
-                        share: [{ shareId: user_id, permission: permissions }]
+                        share: [{ shareId: user_id, permission: permissions, sharing: sharing }]
                     }
                 }
             );
