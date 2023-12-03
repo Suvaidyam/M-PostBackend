@@ -18,7 +18,7 @@ module.exports = {
     },
     share_workspace_with_url: async (req, res, next) => {
         try {
-            let { _id, access } = req.params;
+            let { _id, access, share } = req.params;
             if (!_id) {
                 return res.status(400).json({ message: "workspace is required field" })
             }

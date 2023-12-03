@@ -11,18 +11,31 @@ const WorkSpaceSchema = new mongoose.Schema({
         enum: ["PERSONAL", "TEAM", "PUBLIC"],
         default: "PERSONAL"
     },
+    // share: {
+    //     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    //     default: []
+    // },
     share: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+        type: [{
+            shareId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            permission: {
+                type: String,
+                default: null
+            },
+            sharing: {
+                type: Boolean,
+                default: false
+            }
+        }],
         default: []
     },
     deleted: {
         type: Boolean,
         default: false
     },
-    permission: {
-        type: String,
-        default: null
-    }
 });
 
 const WorkSpace = mongoose.model('WorkSpace', WorkSpaceSchema)

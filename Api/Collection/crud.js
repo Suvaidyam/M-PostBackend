@@ -14,7 +14,7 @@ module.exports = {
       let collection = await Collection.find(condition);
       return res
         .status(200)
-        .json({ message: "Collection list", collection: collection });
+        .json({ message: "Collections list", collection: collection });
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
@@ -43,7 +43,6 @@ module.exports = {
   postCollection: async (req, res) => {
     let created_by = req.decoded._id;
     let { name, type, parent, url, method, details, workspace_id, share } = req.body;
-    console.log(share)
     try {
       let newName;
       if (type) {
