@@ -14,7 +14,7 @@ module.exports = {
         let condition = {
             $or: [
                 { created_by: _id },
-                { share: _id }
+                { share: { shareId: _id } }
             ],
             deleted: false
         }
