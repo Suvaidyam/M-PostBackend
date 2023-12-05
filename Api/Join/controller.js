@@ -14,7 +14,6 @@ module.exports = {
             let { token } = req.params;
             let { JWT_SECRET } = process.env;
             let { _id, permissions, sharing, type } = await JWT.verify(token, JWT_SECRET);
-            console.log(permissions)
             let workspace = await WorkSpace.findById(_id);
             if (!workspace) {
                 return res.status(400).json({ message: 'workspace not found.' })
