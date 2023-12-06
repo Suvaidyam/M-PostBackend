@@ -1,6 +1,14 @@
 const Environment = require('../../Model/Environment');
 const mongoose = require('mongoose')
 module.exports = {
+  getAllEnvironment: async (req, res) => {
+    try {
+      let environment = await Environment.find();
+      return res.status(200).json({ message: "All environment list", environment: environment });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  },
   getEnvironment: async (req, res) => {
     try {
       let environment = await Environment.find(req.params);
@@ -30,6 +38,14 @@ module.exports = {
   softDelete: async (req, res) => {
     try {
       let environment = await Environment.findByIdAndUpdate(req.params, { $set: { deleted: true } }, { new: true });
+      return res.status(200).json({ message: "Delete Successfully", environment: environment });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  },
+  restore: async (req, res) => {
+    try {
+      let environment = await Environment.findByIdAndUpdate(req.params, { $set: { deleted: false } }, { new: false });
       return res.status(200).json({ message: "Delete Successfully", environment: environment });
     } catch (error) {
       return res.status(500).json({ message: error.message });
