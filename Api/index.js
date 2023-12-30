@@ -11,6 +11,7 @@ router.use('/environment', require('./Environment'));
 router.use('/workspace', require('./WorkSpace'));
 router.use('/history', require('./History'));
 
-
+router.use('/share', require('./Share'))
+router.use('/join', require('./Join'))
 
 module.exports = router;
